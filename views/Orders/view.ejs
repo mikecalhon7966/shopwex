@@ -1,0 +1,125 @@
+  
+    <%- contentFor('HeaderCss') %>
+    <!-- perticular page css -->
+      
+    
+    <%- contentFor('body') %>
+  <!-- Start content -->
+  <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title"><%= title %></h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card m-b-20">
+                        <!-- <div class="card-header"><h4 class="mt-0 header-title"><%= title %></h4></div> -->
+                        <div class="card-body">
+                            
+
+                            <p class="mt-1"><b>Customer Details</b></p>
+                            <ul class="detailsLi">
+                                <li><span>Name</span><%= order.customer.name %></li>
+                                <li><span>Email</span><%= order.customer.email %></li>
+                                <li><span>Phone</span><%= order.customer.phone %></li>
+                                <li><span>Business Name</span><%= order.customer.business_name %></li>
+                                <li><span>Business Address</span><%= order.customer.business_address %></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card m-b-20">
+                        <!-- <div class="card-header"><h4 class="mt-0 header-title"><%= title %></h4></div> -->
+                        <div class="card-body">
+                            
+
+                            <p class="mt-1"><b>Order Details</b></p>
+                            <ul class="detailsLi">
+                                <li><span>Order Type</span><%= order.type %></li>
+                                <li><span>Total Price</span><%= order.total %></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-12">
+                    <div class="card m-b-20">
+                        <!-- <div class="card-header"><h4 class="mt-0 header-title"><%= title %></h4></div> -->
+                        <div class="card-body">
+                            
+
+                            <p class="mt-1"><b>Order Products</b></p>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Item No</th>
+                                        <th>Title</th>
+                                        <th>Quantity</th>
+                                        <th>Price/Unit</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% products.forEach(function(item){ %>
+                                        <tr>
+                                            <td><%= item.product.item_no %></td>
+                                            <td><%= item.product.title %></td>
+                                            <td><%= item.quantity %></td>
+                                            <td><%= item.price %></td>
+                                            <td><%= item.price*item.quantity %></td>                                            
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->      
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- content -->
+    
+<%- contentFor('FooterJs') %>
+<style>
+    ul.detailsLi li {
+    padding: 21px;
+    margin: 10px;
+    /* width: 218px; */
+    position: relative;
+    /* float: left; */
+    box-shadow: 0 0 4px 1px #d1d1d1;
+}
+
+ul.detailsLi {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.detailsLi li span {
+    position: absolute;
+    top: 3px;
+    left: 7px;
+    font-size: 12px;
+    color: #ffb100;
+    font-weight: bold;
+}
+</style>
+  <!-- Parsley js -->
+  <script src="public/plugins/parsleyjs/parsley.min.js"></script>
+  <script>
+    $(document).ready(function() {
+        $('form').parsley();
+    });
+</script>

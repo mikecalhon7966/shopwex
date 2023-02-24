@@ -1,0 +1,65 @@
+  
+    <%- contentFor('HeaderCss') %>
+    <!-- perticular page css -->
+      
+    
+    <%- contentFor('body') %>
+  <!-- Start content -->
+  <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">Categories</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card m-b-20">
+                        <div class="card-body">
+                            <h4 class="mt-0 header-title"><%= title %></h4>
+                            <form class="" method="post" action="/category-save" enctype="multipart/form-data">
+                                <% if(typeof category !== 'undefined'){ %>
+                                    <input type="hidden" value="<%= (typeof category !== 'undefined')?category._id:'' %>" name="_id" />
+                                <% } %>
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" value="<%= (typeof category !== 'undefined')?category.title:'' %>" class="form-control" name="title" required placeholder="Type something">
+                                </div>
+                                <div class="form-group">
+                                    <label>Banner</label>
+                                    <input type="file" class="form-control" name="banner" required>
+                                    <% if(typeof category !== 'undefined'){ %>
+                                        <img src="<%= category.banner %>" width="150" />
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                        <button type="reset" class="btn btn-secondary waves-effect m-l-5">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- content -->
+    
+<%- contentFor('FooterJs') %>
+  <!-- Parsley js -->
+  <script src="public/plugins/parsleyjs/parsley.min.js"></script>
+  <script>
+    $(document).ready(function() {
+        $('form').parsley();
+    });
+</script>

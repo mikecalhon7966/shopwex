@@ -1,0 +1,89 @@
+  
+    <%- contentFor('HeaderCss') %>
+    <!-- perticular page css -->
+      
+    
+    <%- contentFor('body') %>
+  <!-- Start content -->
+  <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">Products</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card m-b-20">
+                        <div class="card-body">
+                            <h4 class="mt-0 header-title"><%= title %></h4>
+                            <form class="" method="post" action="/product-save" enctype="multipart/form-data">
+                                <% if(typeof product !== 'undefined'){ %>
+                                    <input type="hidden" value="<%= (typeof product !== 'undefined')?product._id:'' %>" name="_id" />
+                                <% } %>
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select class="form-control" name="category_ids" required>
+                                        <% categories.forEach(function(item){ %>
+                                            <option <%= (typeof product !== 'undefined' && product.category_ids.includes(item._id))?'selected':'' %> value="<%= item._id %>"><%= item.title %></option>                                
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Item Number</label>
+                                    <input type="text" value="<%= (typeof product !== 'undefined')?product.item_no:'' %>" class="form-control" name="item_no" required placeholder="Type something">
+                                </div>
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" value="<%= (typeof product !== 'undefined')?product.title:'' %>" class="form-control" name="title" required placeholder="Type something">
+                                </div>
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <input type="number" step="0.01" value="<%= (typeof product !== 'undefined')?product.price:'' %>" class="form-control" name="price" required placeholder="Type something">
+                                </div>
+                                <div class="form-group">
+                                    <label>Inventory</label>
+                                    <input type="text" value="<%= (typeof product !== 'undefined')?product.inventory:'' %>" class="form-control" name="inventory" required placeholder="Type something">
+                                </div>                                
+                                <div class="form-group">
+                                    <label>Short Description</label>
+                                    <textarea class="form-control" required name="short_description"><%= (typeof product !== 'undefined')?product.short_description:'' %></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Thumbnail</label>
+                                    <input type="file" class="form-control" <%= (typeof product == 'undefined' || product.thumbnail == null)?"required":'' %> name="thumbnail">
+                                    <% if(typeof product !== 'undefined'){  %>
+                                        <img src="<%= product.thumbnail %>" width="150" />
+                                    <% } %>
+
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                        <button type="reset" class="btn btn-secondary waves-effect m-l-5">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- container-fluid -->
+    </div>
+    <!-- content -->
+    
+<%- contentFor('FooterJs') %>
+  <!-- Parsley js -->
+  <script src="public/plugins/parsleyjs/parsley.min.js"></script>
+  <script>
+    $(document).ready(function() {
+        $('form').parsley();
+    });
+</script>
